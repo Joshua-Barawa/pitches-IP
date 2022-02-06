@@ -20,94 +20,10 @@ color:white;
 padding: 0px 5%;
 }
 
-.links a{
-color:#fff;
- }
-
 .links .link{
    margin-right: 30px;
    text-decoration: none;
    font-size: 21px;
    list-style-type:none;
 }
-#heading{
-text-align: center;
-}
-.hero{
-display: flex;
-padding:0px 5%;
-}
 
-.cards{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    grid-gap: 10px;
-    margin:10px;
-    flex:0.9;
-}
-
-.card-body{
-      background-size: cover;
-      height:320px;
-      text-align:bottom;
-      align-items:bottom;
-      border-radius:5px;
-  }
-
- .card-title{
- font-weight:bold;
- }
-
- .row{
- height:200px;
- margin-right:10px;
- width:300px;
- }
-
-#news-source{
-background-color:#e3256b;
-color:#fff;
-font-weight: bold;
-}
-
-#published{
-font-style:italic;
-}
-
- .list-group{
-margin:10px;
- }
-
-#repos{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 10px;
-}
-
-.user-repo{
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    margin-top: 10px !important;
-    padding: 10px;
-    border-radius:5px;
-    text-align:left;
-    background-color:#07041C;
-    color:white;
-}
-
-.user-repo:hover{
-   background-color:rgb(54, 54, 87);
-   color: white;
-   transition-duration: 0.3s;
-}
-
-a{
-    color: rgb(23, 124, 170);
-    text-decoration: none;
-}
-
-#other{
-    display: flex;
-}
-#other p{
-   padding-right: 15px;
-}
