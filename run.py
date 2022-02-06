@@ -1,10 +1,21 @@
-from flask import Flask,render_template
+from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/')
-def add_pitch():
-    return render_template('pitch_form.html')
+ENV = 'dev'
+
+if ENV == 'dev':
+    app.debug = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://joshua:letmein@localhost/joshua'
+else:
+    app.debug == False
+    app.config['SQLALCHEMY_DATABASE_URI'] = ''
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+from views import *
 
 if __name__ == '__main__':
     app.run(debug=True)
