@@ -13,12 +13,12 @@ class Pitch(db.Model):
     upvote = db.Column(db.Integer)
     downvote = db.Column(db.Integer)
 
-    def __init__(self, category, heading, description, posted,upvote, down_vote):
+    def __init__(self, category, heading, description, posted,up_vote, down_vote):
         self.category_id = category
         self.heading = heading
         self.description = description
         self.posted = posted
-        self.up_vote = upvote
+        self.upvote = up_vote
         self.downvote = down_vote
 
 

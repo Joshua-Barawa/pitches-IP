@@ -17,7 +17,8 @@ def form_pitch():
 @app.route('/')
 def get_all_pitches():
     pitches = Pitch.query.all()
-    return render_template('pitches.html', pitches=pitches)
+    name = current_user.username;
+    return render_template('pitches.html', pitches=pitches, name=name)
 
 
 @app.route('/add-pitch', methods=['POST'])
@@ -67,6 +68,24 @@ def login():
     return render_template('auth/login.html', form=login_form)
 
 
+@app.route('/profile')
+@login_required
+def profile():
+    user = User.query.filter_by(username=current_user.username).first()
+    if user is None:
+        abort(404)
+    return render_template("profile.html", user=user)
+
+
+@app.route('/pitch/<int:id>')
+@login_required
+def comment(id):
+    pitch = Pitch.query.filter_by(id=id).first()
+    if pitch is None:
+        abort(404)
+    return render_template("readmore.html", pitch=pitch)
+
+
 @app.route('/logout')
 @login_required
 def logout():
@@ -74,9 +93,3 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route('/user/<string:uname>')
-def profile(uname):
-    user = User.query.filter_by(username=uname).first()
-    if user is None:
-        abort(404)
-    return render_template("profile.html", user=user)

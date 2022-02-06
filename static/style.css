@@ -78,5 +78,36 @@ font-style:italic;
 margin:10px;
  }
 
+#repos{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 10px;
+}
 
+.user-repo{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    margin-top: 10px !important;
+    padding: 10px;
+    border-radius:5px;
+    text-align:left;
+    background-color:#07041C;
+    color:white;
+}
 
+.user-repo:hover{
+   background-color:rgb(54, 54, 87);
+   color: white;
+   transition-duration: 0.3s;
+}
+
+a{
+    color: rgb(23, 124, 170);
+    text-decoration: none;
+}
+
+#other{
+    display: flex;
+}
+#other p{
+   padding-right: 15px;
+}

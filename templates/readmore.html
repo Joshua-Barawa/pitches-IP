@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="repos">
+<div class="user-repo">
+        <p>{{pitch.heading}}</p>
+           <p>{{pitch.description}}</p>
+           <div id="other">
+           <p>Like: {{pitch.upvote}}</p>
+           <p>Dislike: {{pitch.downvote}}</p>
+           </div>
+          <p>Posted By:{{name}}</p>
+          <a href="/" >Go back</a>
+        </div>`
+</div>
+
+<div class="container">
+
+        <div class="container">
+            <br>
+            <br>
+
+            <div class="row align-items-center justify-content-center">
+                <h1>Add  Comment</h1>
+            </div>
+            <br>
+            <form action="/add-pitch" method="POST">
+                <div class="form-row">
+                      <label for="name">Name</label>
+                    <input class="form-control" type="text" placeholder="Description" id="name" name="name">
+                </div>
+                <br>
+                <div class="form-row">
+                    <label for="comment">Comment</label>
+                    <textarea class="form-control" type="text" placeholder="Your comment" id="comment" name="comment"></textarea>
+                </div>
+                <br>
+                <button type="submit " class="btn btn-primary " style="float:right ">Submit</button>
+
+            </form>
+            <br><br>
+        </div>
+    </div>
+
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+        crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js " integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 "
+        crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js " integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy "
+        crossorigin="anonymous "></script>
+</body>
+</html>
