@@ -1,7 +1,7 @@
 from run import db
 from run import login_manager
 from flask_login import UserMixin
-
+from run import bcrypt
 
 class Pitch(db.Model):
     __tablename__ = "pitches"
@@ -36,12 +36,16 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255))
     username = db.Column(db.String(255))
-    password = db.Column(db.String(255))
+    password = db.Column(db.String(255), nullable=False)
 
     def __init__(self, email, username, password):
         self.email = email
         self.username = username
         self.password = password
+
+    def set_password(self, pw):
+        pwhash = bcrypt.hashpw(pw.encode('utf8'), bcrypt.gensalt())
+        self.password = pwhash.decode('utf8')
 
 
 @login_manager.user_loader

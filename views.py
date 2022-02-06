@@ -1,12 +1,11 @@
-import bcrypt
 from flask import render_template, request, redirect, url_for
 from run import app
 from models import Category, Pitch, User
 from datetime import date
 from run import db
-from flask_login import login_user, logout_user, login_required
-from forms import LoginForm
-from flask_bcrypt import Bcrypt
+from flask_login import login_user, logout_user, login_required, current_user
+from forms import LoginForm, RegistrationForm
+from run import bcrypt
 
 
 @app.route('/add-pitch')
@@ -42,38 +41,28 @@ def add_pitch():
             return render_template('pitches.html')
 
 
-@app.route('/auth/register')
-def register():
-    return render_template('auth/register.html')
-
-
-@app.route('/auth/login', methods=['POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register_user():
-    if request.method == 'POST':
-        email = request.form['email']
-        username = request.form['username']
-        password = request.form['password']
-        user = User.query.filter_by(username=username).first()
-        if user is not None and user.verify_password(password):
-            login_user(user)
-            return render_template("auth/register.html", message="User already exists")
-        else:
-            user = User(email, username, password)
-            db.session.add(user)
-            db.session.commit()
-            return render_template('auth/login.html')
+    register_form = RegistrationForm()
+    if register_form.validate_on_submit():
+        password_hash = bcrypt.generate_password_hash(register_form.password.data).decode('utf8')
+        user = User(email=register_form.email.data, username=register_form.username.data, password=password_hash)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('login'))
+    return render_template('auth/register.html', form=register_form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm()
+    if login_form.validate_on_submit():
+        user = User.query.filter_by(username=login_form.username.data).first()
+        if user:
+            if bcrypt.check_password_hash(user.password, login_form.password.data):
+                login_user(user)
+                return redirect(url_for(get_all_pitches))
     return render_template('auth/login.html', form=login_form)
-
-
-# @app.route('/loggedin', methods=['GET', 'POST'])
-# def login_user():
-#     login_form = LoginForm()
-
 
 
 @app.route('/logout')

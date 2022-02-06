@@ -25,11 +25,12 @@
 <div class="main">
 <h1>Create Account</h1>
     <p id="error">{{message}}</p>
-      <form action="/auth/login" method="POST">
-       <input type="email" required autofoucs id="email" name="email" placeholder="email"  />
-          <input type="text" required id="name" name="username" placeholder="username"  />
-         <input type="password" required id="password" name="password" placeholder="password"/>
-       <button id="l-btn" type="submit">Sign Up</button>
+            <form action="" method="POST">
+        {{form.hidden_tag()}}
+        {{form.email}}
+         {{form.username}}
+        {{form.password}}
+        {{form.submit}}
       </form>
       <span>Already a member? </span><a href="/auth/login" id="login">Login</a>
 </div>
