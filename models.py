@@ -1,4 +1,5 @@
 from run import db
+from run import login_manager
 
 
 class Pitch(db.Model):
@@ -40,3 +41,8 @@ class User(db.Model):
         self.email = email
         self.username = username
         self.password = password
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))

@@ -1,8 +1,9 @@
 from flask import render_template, request
 from run import app
-from models import Category, Pitch
+from models import Category, Pitch, User
 from datetime import date
 from run import db
+from flask_login import login_required
 
 
 @app.route('/add-pitch')
@@ -18,6 +19,7 @@ def get_all_pitches():
 
 
 @app.route('/', methods=['POST'])
+@login_required
 def add_pitch():
     categories = Category.query.all()
     if request.method == 'POST':
@@ -37,11 +39,41 @@ def add_pitch():
             return render_template('pitches.html')
 
 
+@app.route('/auth/register')
+def register():
+    return render_template('auth/register.html')
+
+
+@app.route('/auth/login', methods=['POST'])
+def register_user():
+    if request.method == 'POST':
+        email = request.form['email']
+        username = request.form['username']
+        password = request.form['password']
+        if User.query.filter_by(username = username).first():
+            return render_template("auth/register.html", message="User already exists")
+        else:
+            user = User(email, username, password)
+            db.session.add(user)
+            db.session.commit()
+            return render_template('auth/login.html')
+
+
 @app.route('/auth/login')
 def login():
     return render_template('auth/login.html')
 
 
-@app.route('/auth/register')
-def register():
-    return render_template('auth/register.html')
+@app.route('/auth/login', methods=['POST'])
+def register_user():
+    if request.method == 'POST':
+        email = request.form['email']
+        username = request.form['username']
+        password = request.form['password']
+        if User.query.filter_by(username = username).first():
+            return render_template("auth/register.html", message="User already exists")
+        else:
+            user = User(email, username, password)
+            db.session.add(user)
+            db.session.commit()
+            return render_template('auth/login.html')
