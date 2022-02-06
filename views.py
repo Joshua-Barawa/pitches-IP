@@ -1,9 +1,9 @@
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
 from run import app
 from models import Category, Pitch, User
 from datetime import date
 from run import db
-from flask_login import login_required
+from flask_login import login_user, logout_user, login_required
 
 
 @app.route('/add-pitch')
@@ -50,7 +50,7 @@ def register_user():
         email = request.form['email']
         username = request.form['username']
         password = request.form['password']
-        if User.query.filter_by(username = username).first():
+        if User.query.filter_by(username=username).first():
             return render_template("auth/register.html", message="User already exists")
         else:
             user = User(email, username, password)
@@ -64,16 +64,21 @@ def login():
     return render_template('auth/login.html')
 
 
-@app.route('/auth/login', methods=['POST'])
-def register_user():
+@app.route('/loggedin', methods=['POST'])
+def login_user():
     if request.method == 'POST':
-        email = request.form['email']
         username = request.form['username']
         password = request.form['password']
-        if User.query.filter_by(username = username).first():
-            return render_template("auth/register.html", message="User already exists")
+        user = User.query.filter_by(username=username).first()
+        if user is not None and user.verify_password(password):
+            login_user(user)
+            return redirect(url_for("pitches.html"))
         else:
-            user = User(email, username, password)
-            db.session.add(user)
-            db.session.commit()
-            return render_template('auth/login.html')
+            return redirect(url_for("login"))
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("login.html"))
