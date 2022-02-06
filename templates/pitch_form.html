@@ -20,13 +20,13 @@
 
             <form action="/submit" method="POST">
 
-
+                   <p>{{message}}</p>
                 <div class="form-row">
                       <label for="category">Pitch Category</label>
                     <select name="category" id="category" class="form-select" aria-label="Default select example">
-                      <option selected>Open this select menu</option>
+                      <option selected>---select category---</option>
                       {% for category in categories %}
-                      <option value=category.id>{{category.name}}</option>
+                      <option value={{category.id}}>{{category.name}}</option>
                         {%endfor%}
                     </select>
                 </div>

@@ -1,5 +1,4 @@
-from flask import render_template
-import requests
+from flask import render_template, request
 from run import app
 from models import Category
 
@@ -12,5 +11,13 @@ def form_pitch():
 
 @app.route('/submit', methods=['POST'])
 def add_pitch():
-    requests.add_pitch()
-    return render_template('pitch_form.html', message=requests.message)
+    categories = Category.query.all()
+    if request.method == 'POST':
+        category = request.form['category']
+        description = request.form['pitch']
+
+        if category == '---select category---' or description == '':
+            return render_template("pitch_form.html", message="Please enter required fields", categories=categories)
+        else:
+            return render_template('pitch_form.html', message="Please enter required fields", categories=categories)
+
