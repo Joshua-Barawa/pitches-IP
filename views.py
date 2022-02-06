@@ -90,7 +90,6 @@ def comment(id):
 @app.route('/add-comment', methods=['POST'])
 @login_required
 def add_comment():
-
     if request.method == 'POST':
         name = request.form['name']
         description = request.form['comment']
@@ -101,8 +100,7 @@ def add_comment():
             comment = Comment(name, description)
             db.session.add(comment)
             db.session.commit()
-            comments = Comment.query.all()
-            return render_template("readmore.html", comments=comments)
+            return render_template("success.html", message="Comment was added successful")
 
 
 @app.route('/logout')

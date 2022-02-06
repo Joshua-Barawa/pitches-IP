@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home - Pitches</title>
+    <title>Title</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
 <div class="nav">
     <a href="/" class="logo">Pitches</a>
 
@@ -23,22 +22,7 @@
 </ul>
 
 </div>
-<h1>{{message}}</h1>
-<div id="repos">
-{% for pitch in pitches %}
-<div class="user-repo">
-        <p>{{pitch.heading}}</p>
-           <p>{{pitch.description}}</p>
-           <div id="other">
-           <p>Like: {{pitch.upvote}}</p>
-           <p>Dislike: {{pitch.downvote}}</p>
-           </div>
-          <p>Posted By:{{name}}</p>
-          <a href="/pitch/{{pitch.id}}">Read More</a>
-        </div>`
-{%endfor %}
-</div>
 
-
+<h2>{{message}}</h2>
 </body>
 </html>
