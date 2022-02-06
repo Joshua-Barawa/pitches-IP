@@ -23,7 +23,7 @@
 {% for pitch in pitches %}
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h1 class="card-title">{{pitch.category}}</h1>
+    <h1 class="card-title">{{pitch.category_id.name}}</h1>
     <h6 class="card-subtitle mb-2 text-muted">{{pitch.heading}}</h6>
     <p class="card-text">{{pitch.description}}</p>
     <p>Posted: {{pitch.posted}}</p>

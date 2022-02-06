@@ -25,12 +25,23 @@ def add_pitch():
         heading = request.form['name']
         description = request.form['pitch']
         posted = date.today()
+        upvote = 0
+        downvote = 0
 
         if category == '---select category---' or description == '' or heading == '':
             return render_template("pitch_form.html", message="Please enter required fields", categories=categories)
         else:
-            pitch = Pitch(category, heading, description, posted)
+            pitch = Pitch(category, heading, description, posted, upvote, upvote)
             db.session.add(pitch)
             db.session.commit()
             return render_template('pitches.html')
 
+
+@app.route('/auth/login')
+def login():
+    return render_template('auth/login.html')
+
+
+@app.route('/auth/register')
+def register():
+    return render_template('auth/register.html')
