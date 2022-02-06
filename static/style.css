@@ -1,0 +1,79 @@
+
+.nav{
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color:#0e387a;
+text-align:center;
+height:80px;
+position:relative;
+}
+
+.nav .logo{
+color:#fff;
+padding: 0px 5%;
+}
+
+.nav .links{
+display: inline-flex;
+color:white;
+padding: 0px 5%;
+}
+
+.links a{
+color:#fff;
+ }
+
+.links .link{
+   margin-right: 30px;
+   text-decoration: none;
+   font-size: 21px;
+   list-style-type:none;
+}
+#heading{
+text-align: center;
+}
+.hero{
+display: flex;
+padding:0px 5%;
+}
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-gap: 10px;
+    margin:10px;
+    flex:0.9;
+}
+
+.card-body{
+      background-size: cover;
+      height:320px;
+      text-align:bottom;
+      align-items:bottom;
+      border-radius:5px;
+  }
+
+ .card-title{
+ font-weight:bold;
+ }
+
+ .row{
+ height:200px;
+ margin-right:10px;
+ width:300px;
+ }
+
+#news-source{
+background-color:#e3256b;
+color:#fff;
+font-weight: bold;
+}
+
+#published{
+font-style:italic;
+}
+
+ .list-group{
+margin:10px;
+ }
