@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, abort
 from run import app
 from models import Category, Pitch, User
 from datetime import date
@@ -74,7 +74,9 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route('/user/<uname>')
+@app.route('/user/<string:uname>')
 def profile(uname):
     user = User.query.filter_by(username=uname).first()
+    if user is None:
+        abort(404)
     return render_template("profile.html", user=user)
