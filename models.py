@@ -3,6 +3,7 @@ from run import login_manager
 from flask_login import UserMixin
 from run import bcrypt
 
+
 class Pitch(db.Model):
     __tablename__ = "pitches"
     id = db.Column(db.Integer, primary_key=True)
@@ -52,3 +53,14 @@ class User(UserMixin, db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+
+class Comment(db.Model):
+    __tablename__ = "comments"
+    id = db.Column(db.Integer, primary_key=True)
+    comment_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    name = db.Column(db.String(255))
+    desc = db.Column(db.String(255))
+
+    def __init__(self, name, desc):
+        self.name = name
+        self.desc = desc

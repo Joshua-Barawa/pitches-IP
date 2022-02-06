@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, abort
 from run import app
-from models import Category, Pitch, User
+from models import Category, Pitch, User, Comment
 from datetime import date
 from run import db
 from flask_login import login_user, logout_user, login_required, current_user
@@ -81,9 +81,28 @@ def profile():
 @login_required
 def comment(id):
     pitch = Pitch.query.filter_by(id=id).first()
+    comments = Comment.query.all()
     if pitch is None:
         abort(404)
-    return render_template("readmore.html", pitch=pitch)
+    return render_template("readmore.html", pitch=pitch, comments=comments)
+
+
+@app.route('/add-comment', methods=['POST'])
+@login_required
+def add_comment():
+
+    if request.method == 'POST':
+        name = request.form['name']
+        description = request.form['comment']
+
+        if name == '' or description == '' :
+            return render_template("readmore.html", message="Please enter required fields")
+        else:
+            comment = Comment(name, description)
+            db.session.add(comment)
+            db.session.commit()
+            comments = Comment.query.all()
+            return render_template("readmore.html", comments=comments)
 
 
 @app.route('/logout')

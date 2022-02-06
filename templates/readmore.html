@@ -28,10 +28,10 @@
                 <h1>Add  Comment</h1>
             </div>
             <br>
-            <form action="/add-pitch" method="POST">
+            <form action="/add-comment" method="POST">
                 <div class="form-row">
                       <label for="name">Name</label>
-                    <input class="form-control" type="text" placeholder="Description" id="name" name="name">
+                    <input class="form-control" type="text" placeholder="name" id="name" name="name">
                 </div>
                 <br>
                 <div class="form-row">
@@ -39,12 +39,22 @@
                     <textarea class="form-control" type="text" placeholder="Your comment" id="comment" name="comment"></textarea>
                 </div>
                 <br>
-                <button type="submit " class="btn btn-primary " style="float:right ">Submit</button>
+                <button type="submit " class=" btn-primary " >Submit</button>
 
             </form>
             <br><br>
         </div>
     </div>
+
+<div id="comments">
+{% for comment in comments %}
+<div class="user-repo">
+        <p>{{comment.name}}</p>
+           <p>{{comment.desc}}</p>
+        </div>`
+{%endfor %}
+</div>
+
 
  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
         crossorigin="anonymous "></script>
