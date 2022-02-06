@@ -12,10 +12,13 @@
     <h2 class="logo">Pitches</h2>
 
 <ul class="links">
+     {% if current_user.is_authenticated %}
+    <li class="link"><a href='#'>Profile</a></li>
+    <li class="link"><a href='/logout'>Logout</a></li>
+    {% else %}
     <li class="link"><a href='/auth/login'>Login</a></li>
    <li class="link"><a href='/auth/register'>SignUp</a></li>
-    <li class="link"><a href='#'>Profile</a></li>
-    <li class="link"><a href='#'>Logout</a></li>
+    {%endif%}
 </ul>
 </div>
 

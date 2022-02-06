@@ -1,9 +1,12 @@
+import bcrypt
 from flask import render_template, request, redirect, url_for
 from run import app
 from models import Category, Pitch, User
 from datetime import date
 from run import db
 from flask_login import login_user, logout_user, login_required
+from forms import LoginForm
+from flask_bcrypt import Bcrypt
 
 
 @app.route('/add-pitch')
@@ -50,7 +53,9 @@ def register_user():
         email = request.form['email']
         username = request.form['username']
         password = request.form['password']
-        if User.query.filter_by(username=username).first():
+        user = User.query.filter_by(username=username).first()
+        if user is not None and user.verify_password(password):
+            login_user(user)
             return render_template("auth/register.html", message="User already exists")
         else:
             user = User(email, username, password)
@@ -59,26 +64,20 @@ def register_user():
             return render_template('auth/login.html')
 
 
-@app.route('/auth/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('auth/login.html')
+    login_form = LoginForm()
+    return render_template('auth/login.html', form=login_form)
 
 
-@app.route('/loggedin', methods=['POST'])
-def login_user():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        user = User.query.filter_by(username=username).first()
-        if user is not None and user.verify_password(password):
-            login_user(user)
-            return redirect(url_for("pitches.html"))
-        else:
-            return redirect(url_for("login"))
+# @app.route('/loggedin', methods=['GET', 'POST'])
+# def login_user():
+#     login_form = LoginForm()
+
 
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("login.html"))
+    return redirect(url_for("login"))
