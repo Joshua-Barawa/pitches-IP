@@ -72,3 +72,9 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for("login"))
+
+
+@app.route('/user/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username=uname).first()
+    return render_template("profile.html", user=user)
