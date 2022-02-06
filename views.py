@@ -17,13 +17,19 @@ def form_pitch():
 @app.route('/')
 def get_all_pitches():
     pitches = Pitch.query.all()
-    name = current_user.username;
-    return render_template('pitches.html', pitches=pitches, name=name)
+    return render_template('pitches.html', pitches=pitches)
+
+
+@app.route('/<int:id>')
+def get_pitches_by_category():
+    pitches = Pitch.query.filter_by(category_id=id)
+    return render_template('pitches.html', pitches=pitches)
 
 
 @app.route('/add-pitch', methods=['POST'])
 @login_required
 def add_pitch():
+
     categories = Category.query.all()
     if request.method == 'POST':
         category = request.form['category']
@@ -32,11 +38,12 @@ def add_pitch():
         posted = date.today()
         upvote = 0
         downvote = 0
+        name = current_user.username;
 
         if category == '---select category---' or description == '' or heading == '':
             return render_template("pitch_form.html", message="Please enter required fields", categories=categories)
         else:
-            pitch = Pitch(category, heading, description, posted, upvote, upvote)
+            pitch = Pitch(category, heading, description, posted, upvote, upvote,name)
             db.session.add(pitch)
             db.session.commit()
             pitches = Pitch.query.all()

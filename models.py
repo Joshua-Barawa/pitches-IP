@@ -13,14 +13,16 @@ class Pitch(db.Model):
     posted = db.Column(db.Date)
     upvote = db.Column(db.Integer)
     downvote = db.Column(db.Integer)
+    name = db.Column(db.String(255))
 
-    def __init__(self, category, heading, description, posted,up_vote, down_vote):
+    def __init__(self, category, heading, description, posted,up_vote, down_vote, name):
         self.category_id = category
         self.heading = heading
         self.description = description
         self.posted = posted
         self.upvote = up_vote
         self.downvote = down_vote
+        self.name = name
 
 
 class Category(db.Model):
