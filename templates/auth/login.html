@@ -13,11 +13,12 @@
 
 <ul class="links">
     {% if current_user.is_authenticated %}
-    <li class="link"><a href='/profile'>Profile</a></li>
+     <li class="link"><a href='/pitch-form'>Add-Pitch</a></li>
+    <li class="link"><a href='#'>Profile</a></li>
     <li class="link"><a href='/logout'>Logout</a></li>
     {% else %}
-    <li class="link"><a href='/auth/login'>Login</a></li>
-   <li class="link"><a href='/auth/register'>SignUp</a></li>
+    <li class="link"><a href='/login'>Login</a></li>
+   <li class="link"><a href='/register'>SignUp</a></li>
     {%endif%}
 </ul>
 </div>
@@ -32,7 +33,7 @@
         {{form.password}}
         {{form.submit}}
 </form>
-<span>Don't have an account? </span><a href="/auth/register" id="signup">Sign Up</a>
+<span>Don't have an account? </span><a href="/register" id="signup">Sign Up</a>
 </div>
 </body>
 </html>

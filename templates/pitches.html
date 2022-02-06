@@ -12,11 +12,12 @@
 
 <ul class="links">
     {% if current_user.is_authenticated %}
+     <li class="link"><a href='/pitch-form'>Add-Pitch</a></li>
     <li class="link"><a href='#'>Profile</a></li>
     <li class="link"><a href='/logout'>Logout</a></li>
     {% else %}
-    <li class="link"><a href='/auth/login'>Login</a></li>
-   <li class="link"><a href='/auth/register'>SignUp</a></li>
+    <li class="link"><a href='/login'>Login</a></li>
+   <li class="link"><a href='/register'>SignUp</a></li>
     {%endif%}
 </ul>
 
@@ -26,7 +27,7 @@
 {% for pitch in pitches %}
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h1 class="card-title">{{pitch.category_id.name}}</h1>
+    <h1 class="card-title">{{pitch.category_id}}</h1>
     <h6 class="card-subtitle mb-2 text-muted">{{pitch.heading}}</h6>
     <p class="card-text">{{pitch.description}}</p>
     <p>Posted: {{pitch.posted}}</p>

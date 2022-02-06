@@ -10,14 +10,14 @@
 <body>
 <div class="nav">
     <h2 class="logo">Pitches</h2>
-
 <ul class="links">
-     {% if current_user.is_authenticated %}
+    {% if current_user.is_authenticated %}
+     <li class="link"><a href='/pitch-form'>Add-Pitch</a></li>
     <li class="link"><a href='#'>Profile</a></li>
     <li class="link"><a href='/logout'>Logout</a></li>
     {% else %}
-    <li class="link"><a href='/auth/login'>Login</a></li>
-   <li class="link"><a href='/auth/register'>SignUp</a></li>
+    <li class="link"><a href='/login'>Login</a></li>
+   <li class="link"><a href='/register'>SignUp</a></li>
     {%endif%}
 </ul>
 </div>
@@ -32,7 +32,7 @@
         {{form.password}}
         {{form.submit}}
       </form>
-      <span>Already a member? </span><a href="/auth/login" id="login">Login</a>
+      <span>Already a member? </span><a href="/login" id="login">Login</a>
 </div>
 </body>
 </html>

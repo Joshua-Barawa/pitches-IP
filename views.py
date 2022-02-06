@@ -8,7 +8,7 @@ from forms import LoginForm, RegistrationForm
 from run import bcrypt
 
 
-@app.route('/add-pitch')
+@app.route('/pitch-form')
 def form_pitch():
     categories = Category.query.all()
     return render_template('pitch_form.html', categories=categories)
@@ -20,7 +20,7 @@ def get_all_pitches():
     return render_template('pitches.html', pitches=pitches)
 
 
-@app.route('/', methods=['POST'])
+@app.route('/add-pitch', methods=['POST'])
 @login_required
 def add_pitch():
     categories = Category.query.all()
@@ -38,7 +38,8 @@ def add_pitch():
             pitch = Pitch(category, heading, description, posted, upvote, upvote)
             db.session.add(pitch)
             db.session.commit()
-            return render_template('pitches.html')
+            pitches = Pitch.query.all()
+            return render_template('pitches.html', pitches=pitches )
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -61,7 +62,8 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, login_form.password.data):
                 login_user(user)
-                return redirect(url_for(get_all_pitches))
+                pitches = get_all_pitches()
+                return render_template('pitches.html', pitches=pitches)
     return render_template('auth/login.html', form=login_form)
 
 
