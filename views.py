@@ -1,6 +1,8 @@
 from flask import render_template, request
 from run import app
-from models import Category
+from models import Category, Pitch
+from datetime import date
+from run import db
 
 
 @app.route('/')
@@ -15,9 +17,13 @@ def add_pitch():
     if request.method == 'POST':
         category = request.form['category']
         description = request.form['pitch']
+        posted = date.today()
 
         if category == '---select category---' or description == '':
             return render_template("pitch_form.html", message="Please enter required fields", categories=categories)
         else:
-            return render_template('pitch_form.html', message="Please enter required fields", categories=categories)
+            pitch = Pitch(category, description, posted)
+            db.session.add(pitch)
+            db.session.commit()
+            return render_template('pitches.html')
 

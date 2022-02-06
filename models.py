@@ -1,4 +1,3 @@
-
 from run import db
 
 
@@ -22,9 +21,3 @@ class Category(db.Model):
 
     def __init__(self, name):
         self.name = name
-
-    def serialize(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-        }
