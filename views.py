@@ -21,7 +21,7 @@ def get_all_pitches():
 
 
 @app.route('/<int:id>')
-def get_pitches_by_category():
+def get_pitches_by_category(id):
     pitches = Pitch.query.filter_by(category_id=id)
     return render_template('pitches.html', pitches=pitches)
 
