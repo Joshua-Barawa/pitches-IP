@@ -17,7 +17,7 @@
     margin-bottom: 40px;
     padding: 20px;
     width: 400px;
-    border-radius:10px;
+    border-radius:5px;
     margin-right: 20px;
 }
 
@@ -27,6 +27,21 @@
 
 #other p{
    padding-right: 15px;
+}
+
+.posted{
+margin-right:50px
+}
+
+.h{
+font-size:25px;
+font-weight:bold;
+}
+.l{
+color:green;
+}
+.d{
+color:red;
 }
 </style>
 <body>
@@ -53,13 +68,13 @@
 <div id="repos">
 {% for pitch in pitches %}
 <div class="user-repo">
-        <p>{{pitch.heading}}</p>
+        <p class="h">{{pitch.heading}}</p>
            <p>{{pitch.description}}</p>
            <div id="other">
-           <p>Like: {{pitch.upvote}}</p>
-           <p>Dislike: {{pitch.downvote}}</p>
+           <p class="l">Like: {{pitch.upvote}}</p>
+           <p class="d">Dislike: {{pitch.downvote}}</p>
            </div>
-          <p>Posted By:{{pitch.name}}</p>
+          <span class="posted">{{pitch.name}}</span><span class="posted">Posted: {{pitch.posted}}</span><br>
           <a href="/pitch/{{pitch.id}}">Read More</a>
         </div>`
 {%endfor %}

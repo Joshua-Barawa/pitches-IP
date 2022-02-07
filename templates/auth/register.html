@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>User-Register</title>
       <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -59,9 +59,9 @@ h1{
 <ul class="links">
     {% if current_user.is_authenticated %}
      <li class="link"><a href='/pitch-form'>Add-Pitch</a></li>
-    <li class="link"><a href='/pitch-form'>Self-Pitch</a></li>
-    <li class="link"><a href='/pitch-form'>Motivation</a></li>
-    <li class="link"><a href='/pitch-form'>Business</a></li>
+    <li class="link"><a href='/2'>Self-Pitch</a></li>
+    <li class="link"><a href='/1'>Motivation</a></li>
+    <li class="link"><a href='/3'>Business</a></li>
     <li class="link"><a href='/profile'>Profile</a></li>
     <li class="link"><a href='/logout'>Logout</a></li>
     {% else %}

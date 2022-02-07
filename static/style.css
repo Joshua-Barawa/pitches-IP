@@ -10,14 +10,15 @@ position:relative;
 }
 
 .nav .logo{
-color:#fff;
+color:;
 padding: 0px 5%;
+font-size:25;
 }
 
 .nav .links{
 display: inline-flex;
-color:white;
 padding: 0px 5%;
+color:white;
 }
 
 .links .link{
@@ -25,5 +26,6 @@ padding: 0px 5%;
    text-decoration: none;
    font-size: 21px;
    list-style-type:none;
+   color:white;
 }
 

@@ -21,6 +21,7 @@ def mail_message(subject,template,to,**kwargs):
 
 @app.route('/pitch-form')
 def form_pitch():
+
     categories = Category.query.all()
     return render_template('pitch_form.html', categories=categories)
 
@@ -57,8 +58,7 @@ def add_pitch():
             pitch = Pitch(category, heading, description, posted, upvote, upvote,name)
             db.session.add(pitch)
             db.session.commit()
-            pitches = Pitch.query.all()
-            return render_template('pitches.html', pitches=pitches )
+            return redirect(url_for("get_all_pitches"))
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -69,7 +69,6 @@ def register_user():
         user = User(email=register_form.email.data, username=register_form.username.data, password=password_hash)
         db.session.add(user)
         db.session.commit()
-        mail_message("Welcome to pitches application","email/welcome_user",user.email,user=user)
         return redirect(url_for('login'))
     return render_template('auth/register.html', form=register_form)
 
@@ -82,8 +81,7 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, login_form.password.data):
                 login_user(user)
-                pitches = get_all_pitches()
-                return render_template('pitches.html', pitches=pitches)
+                return redirect(url_for("get_all_pitches"))
     return render_template('auth/login.html', form=login_form)
 
 
