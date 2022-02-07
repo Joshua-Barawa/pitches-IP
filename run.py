@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 ENV = 'dev'
 
-if ENV == 'dev':
+if ENV == 'prod':
     app.debug = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://joshua:letmein@localhost/joshua'
     app.config['SECRET_KEY'] = "1234567"
@@ -22,7 +22,7 @@ if ENV == 'dev':
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 else:
     app.debug == False
-    app.config['SQLALCHEMY_DATABASE_URI'] = ''
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://vfcrkuevbauihe:9a05fdafba9e870da60ce663723631402bdb4e5f550c356d49adff45f1cc60ad@ec2-3-212-194-162.compute-1.amazonaws.com:5432/df12jjr7k1aigj'
     app.config['SECRET_KEY'] = "1234567"
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
