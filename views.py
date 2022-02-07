@@ -6,6 +6,17 @@ from run import db
 from flask_login import login_user, logout_user, login_required, current_user
 from forms import LoginForm, RegistrationForm
 from run import bcrypt
+from flask_mail import Message
+from run import mail
+
+
+def mail_message(subject,template,to,**kwargs):
+    sender_email = 'joshua.barawa@student.moringaschool.com'
+
+    email = Message(subject, sender=sender_email, recipients=[to])
+    email.body= render_template(template + ".txt",**kwargs)
+    email.html = render_template(template + ".html",**kwargs)
+    mail.send(email)
 
 
 @app.route('/pitch-form')
@@ -58,6 +69,7 @@ def register_user():
         user = User(email=register_form.email.data, username=register_form.username.data, password=password_hash)
         db.session.add(user)
         db.session.commit()
+        mail_message("Welcome to pitches application","email/welcome_user",user.email,user=user)
         return redirect(url_for('login'))
     return render_template('auth/register.html', form=register_form)
 
